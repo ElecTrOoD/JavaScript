@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 Task 3</title>
+</head>
+<body>
+    <div class="basket"></div>
+</body>
+<script>
+    function getProduct(name, price, count) {
+        return {
+            name,
+            price,
+            count,
+            calcFullPrice() {
+                return this.price * this.count;
+            }
+        }
+    }
+
+    function getBasket(products) {
+        return {
+            products,
+            countBasketPrice() {
+                return this.products.reduce((total_price, product) => total_price + product.calcFullPrice(), 0);
+            },
+
+            outputBasket() {
+                const countedPrice = this.countBasketPrice();
+                const bst = document.querySelector('.basket');
+                if (countedPrice > 0) {
+                    bst.textContent += `В корзине: ${this.products.length} товара(ов) на сумму ${countedPrice} рублей`;
+                } else {
+                bst.textContent += 'Корзина пуста';
+                }
+            }
+        }
+    }
+
+    let productList = [
+        getProduct('Яблоки', 50, 3),
+        getProduct('Груши', 65, 1),
+        getProduct('Персики', 85, 2),
+        getProduct('Бананы', 55, 1)
+    ]
+    let basket = getBasket(productList);
+
+    basket.outputBasket();
+</script>
+</html>

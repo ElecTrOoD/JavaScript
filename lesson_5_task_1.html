@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson 5 Task 1</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        tr {
+            width: 40px;
+            height: 40px;
+            color: red;
+        }
+        td {
+            border: 1px solid black;
+            width: 40px;
+            height: 40px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+<script>
+    function chessBoard() {
+        document.body.insertAdjacentHTML("afterbegin", "<table></table>");
+        for(let i = 0; i < 8; i++) {
+            createRow();
+            for(let j = 0; j < 8; j++) {
+                createCell();
+                const cell = document.querySelector('tr:last-child > td:last-child');
+                if(!(i % 2 === j % 2)) cell.style.backgroundColor= 'black';
+            }
+        }
+        nameRowCol();
+    }
+
+    function nameRowCol() {
+        const chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        for(let i = 0; i < 8; i++) {
+            const row = document.querySelector(`tr:nth-child(${i + 1})`);
+            row.innerHTML += 8 - i;
+            const col = document.querySelector(`td:nth-child(${i + 1})`);
+            col.innerHTML += chars[i];
+        }
+    }
+
+    function createRow() {
+        const table = document.querySelector('table');
+        const trElem = document.createElement('tr');
+        table.appendChild(trElem);
+    }
+
+    function createCell() {
+        const trElem = document.querySelector('tr:last-child');
+        const tdElem = document.createElement('td');
+        trElem.appendChild(tdElem);
+    }
+
+    chessBoard();
+</script>
+</html>
